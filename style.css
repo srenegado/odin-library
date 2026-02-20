@@ -24,6 +24,18 @@ body {
   font-size: 1rem;
 }
 
+.book-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.book-card-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .new-book-wrapper {
   text-align: center;
   margin-bottom: 8px;

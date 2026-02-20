@@ -27,18 +27,24 @@ function displayLibrary() {
   library.forEach(book => {
     const bookCard = document.createElement("div");
     const removeBookButton = document.createElement("button");
+    const toggleReadButton = document.createElement("button");
+    const bookCardButtons = document.createElement("div");
 
     bookCard.classList.add("book-card");
     bookCard.textContent = book.info();
     bookCard.dataset.id = book.id;
-    bookCard.style.display = "flex";
-    bookCard.style.alignItems = "center";
-    bookCard.style.justifyContent = "space-between";
+
+    bookCardButtons.classList.add("book-card-buttons");
+
+    toggleReadButton.classList.add("remove-book-button");
+    toggleReadButton.textContent = "Change read status";
 
     removeBookButton.classList.add("remove-book-button");
     removeBookButton.textContent = "Remove";
 
-    bookCard.appendChild(removeBookButton);
+    bookCardButtons.appendChild(toggleReadButton);
+    bookCardButtons.appendChild(removeBookButton);
+    bookCard.appendChild(bookCardButtons);
     bookList.appendChild(bookCard);
   });
 
@@ -88,7 +94,7 @@ function handleBookRemoval() {
 
   removeBookButtons.forEach((removeBookButton) => {
     removeBookButton.addEventListener("click", () => {
-      const bookCard = removeBookButton.parentElement;
+      const bookCard = removeBookButton.parentElement.parentElement;
       const bookToRemoveIndex = library.findIndex((book) => book.id == bookCard.dataset.id);
       
       library.splice(bookToRemoveIndex, 1);
