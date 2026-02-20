@@ -32,6 +32,14 @@ function displayLibrary() {
   });
 }
 
+function clearBooksOnDisplay() {
+  const book_list = document.querySelector(".book-list");
+
+  while(book_list.firstChild) {
+    book_list.removeChild(book_list.firstChild);
+  }
+}
+
 function handleNewBookSubmission() {
   const newBookButton = document.querySelector(".new-book-button");
   const newBookModal = document.querySelector(".new-book-modal");
@@ -46,21 +54,19 @@ function handleNewBookSubmission() {
 
     const newBookForm = document.querySelector(".new-book-form");
     const newBookFormData = new FormData(newBookForm, addBookButton);
-    
+
     addBookToLibrary(
       newBookFormData.get("title"),
       newBookFormData.get("author"),
       Number(newBookFormData.get("pages")),
-      newBookFormData.get("read"),
+      newBookFormData.get("read") === "true"
     );
 
     newBookModal.close();
+
+    clearBooksOnDisplay();
+    displayLibrary();
   })
 }
 
 handleNewBookSubmission();
-
-addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false); // Sample 
-addBookToLibrary("Merlin's Ring", "H. Warner Munn", 384, true);
-
-displayLibrary();
