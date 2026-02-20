@@ -9,13 +9,18 @@ function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = (read) ? "read" : "not read yet";
-
-  this.info = function() {
-    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.read}`;
-  }
+  this.read = read;
 }
 
+Book.prototype.info = function() {
+  const readInfo = (this.read) ? "read" : "not read yet";
+  return `${this.title} by ${this.author}, ${this.pages} pages, ${readInfo}`;
+}
+
+Book.prototype.toggleReadStatus = function() {
+  this.read = !(this.read);
+}
+ 
 function addBookToLibrary(title, author, pages, read) {
   const aBook = new Book(title, author, pages, read);
   library.push(aBook);
@@ -36,7 +41,7 @@ function displayLibrary() {
 
     bookCardButtons.classList.add("book-card-buttons");
 
-    toggleReadButton.classList.add("remove-book-button");
+    toggleReadButton.classList.add("toggle-read-button");
     toggleReadButton.textContent = "Change read status";
 
     removeBookButton.classList.add("remove-book-button");
