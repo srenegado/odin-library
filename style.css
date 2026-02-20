@@ -14,7 +14,8 @@ body {
 
 .book-card,
 .new-book-button,
-.add-book-button {
+.add-book-button,
+.remove-book-button {
   border-radius: 8px;
   border: 1px solid lightgray;
   background-color: white;

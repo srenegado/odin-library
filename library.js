@@ -22,21 +22,34 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function displayLibrary() {
-  const book_list = document.querySelector(".book-list");
+  const bookList = document.querySelector(".book-list");
 
   library.forEach(book => {
-    const book_card = document.createElement("div");
-    book_card.classList.add("book-card");
-    book_card.textContent = book.info();
-    book_list.appendChild(book_card);
+    const bookCard = document.createElement("div");
+    const removeBookButton = document.createElement("button");
+
+    bookCard.classList.add("book-card");
+    bookCard.textContent = book.info();
+    bookCard.dataset.id = book.id;
+    bookCard.style.display = "flex";
+    bookCard.style.alignItems = "center";
+    bookCard.style.justifyContent = "space-between";
+
+    removeBookButton.classList.add("remove-book-button");
+    removeBookButton.textContent = "Remove";
+
+    bookCard.appendChild(removeBookButton);
+    bookList.appendChild(bookCard);
   });
+
+  handleBookRemoval();
 }
 
 function clearBooksOnDisplay() {
-  const book_list = document.querySelector(".book-list");
+  const bookList = document.querySelector(".book-list");
 
-  while(book_list.firstChild) {
-    book_list.removeChild(book_list.firstChild);
+  while(bookList.firstChild) {
+    bookList.removeChild(bookList.firstChild);
   }
 }
 
@@ -62,11 +75,29 @@ function handleNewBookSubmission() {
       newBookFormData.get("read") === "true"
     );
 
-    newBookModal.close();
+    // Have to close manually because of e.preventDefault()
+    newBookModal.close(); 
 
     clearBooksOnDisplay();
     displayLibrary();
   })
+}
+
+function handleBookRemoval() {
+  const removeBookButtons = document.querySelectorAll(".remove-book-button");
+
+  removeBookButtons.forEach((removeBookButton) => {
+    removeBookButton.addEventListener("click", () => {
+      const bookCard = removeBookButton.parentElement;
+      const bookToRemoveIndex = library.findIndex((book) => book.id == bookCard.dataset.id);
+      
+      library.splice(bookToRemoveIndex, 1);
+      
+      clearBooksOnDisplay();
+      displayLibrary();
+    });
+
+  });
 }
 
 handleNewBookSubmission();
