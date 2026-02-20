@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.book-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.book-card {
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  background-color: white;
+  filter: drop-shadow(#00000025 0 0 1px);
+  padding: 16px;
+}
