@@ -54,6 +54,7 @@ function displayLibrary() {
   });
 
   handleBookRemoval();
+  handleToggleReadStatus();
 }
 
 function clearBooksOnDisplay() {
@@ -107,7 +108,22 @@ function handleBookRemoval() {
       clearBooksOnDisplay();
       displayLibrary();
     });
+  });
+}
 
+function handleToggleReadStatus() {
+  const toggleReadButtons = document.querySelectorAll(".toggle-read-button");
+
+  toggleReadButtons.forEach((toggleReadButton) => {
+    toggleReadButton.addEventListener("click", () => {
+      const bookCard = toggleReadButton.parentElement.parentElement;
+      const bookToUpdate = library.find((book) => book.id == bookCard.dataset.id);
+    
+      bookToUpdate.toggleReadStatus();
+      
+      clearBooksOnDisplay();
+      displayLibrary();
+    });
   });
 }
 
