@@ -32,6 +32,17 @@ function displayLibrary() {
   });
 }
 
+function setUpNewBookButton() {
+  const newBookButton = document.querySelector(".new-book-button");
+  const newBookModal = document.querySelector(".new-book-modal");
+
+  newBookButton.addEventListener("click", () => {
+    newBookModal.showModal();
+  })
+}
+
+setUpNewBookButton();
+
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false); // Sample 
 addBookToLibrary("Merlin's Ring", "H. Warner Munn", 384, true);
 

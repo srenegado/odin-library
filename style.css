@@ -12,10 +12,16 @@ body {
   margin: 0 auto;
 }
 
-.book-card {
+.book-card,
+.new-book-button {
   border-radius: 8px;
   border: 1px solid lightgray;
   background-color: white;
   filter: drop-shadow(#00000025 0 0 1px);
   padding: 16px;
+}
+
+.new-book-wrapper {
+  text-align: center;
+  margin-bottom: 8px;
 }
