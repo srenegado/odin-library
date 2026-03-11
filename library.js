@@ -33,10 +33,12 @@ function displayLibrary() {
     const removeBookButton = document.createElement("button");
     const toggleReadButton = document.createElement("button");
     const bookCardButtons = document.createElement("div");
+    const bookCardDescription = document.createElement("span");
 
     bookCard.classList.add("book-card");
-    bookCard.textContent = book.info();
     bookCard.dataset.id = book.id;
+
+    bookCardDescription.textContent = book.info();
 
     bookCardButtons.classList.add("book-card-buttons");
 
@@ -48,12 +50,10 @@ function displayLibrary() {
 
     bookCardButtons.appendChild(toggleReadButton);
     bookCardButtons.appendChild(removeBookButton);
+    bookCard.appendChild(bookCardDescription);
     bookCard.appendChild(bookCardButtons);
     bookList.appendChild(bookCard);
   });
-
-  handleBookRemoval();
-  handleToggleReadStatus();
 }
 
 function clearBooksOnDisplay() {
@@ -91,6 +91,8 @@ function handleNewBookSubmission() {
 
     clearBooksOnDisplay();
     displayLibrary();
+    handleBookRemoval();
+    handleToggleReadStatus();
   })
 }
 
@@ -103,9 +105,7 @@ function handleBookRemoval() {
       const bookToRemoveIndex = library.findIndex((book) => book.id == bookCard.dataset.id);
       
       library.splice(bookToRemoveIndex, 1);
-      
-      clearBooksOnDisplay();
-      displayLibrary();
+      bookCard.remove();
     });
   });
 }
@@ -119,9 +119,7 @@ function handleToggleReadStatus() {
       const bookToUpdate = library.find((book) => book.id == bookCard.dataset.id);
     
       bookToUpdate.toggleReadStatus();
-      
-      clearBooksOnDisplay();
-      displayLibrary();
+      bookCard.firstChild.textContent = bookToUpdate.info();
     });
   });
 }
